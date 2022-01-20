@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { contratistasController } from '../controllers/contratistasController';
 
 class ContratistasRoutes {
 
@@ -9,7 +10,10 @@ class ContratistasRoutes {
     }
 
     config(): void {
-        this.router.get('/', (req,res) => res.send('Contratistas'));
+        this.router.get('/', contratistasController.index);
+        this.router.post('/', contratistasController.create);
+        this.router.put('/:id', contratistasController.update);
+        this.router.delete('/:id', contratistasController.delete);
     }
 }
 
