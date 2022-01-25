@@ -1,9 +1,11 @@
 export default {
 
     database: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: '75SUPERbrujuladb28*',
+        host: 'localhost',
         database: 'contratistas',
+        user: 'root',
+        password: 'whareverpassword',
+        port: 3306
+        
     }
 }
