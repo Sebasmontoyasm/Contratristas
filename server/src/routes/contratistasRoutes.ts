@@ -14,6 +14,8 @@ class ContratistasRoutes {
         this.router.post('/', contratistasController.create);
         this.router.put('/:id', contratistasController.update);
         this.router.delete('/:id', contratistasController.delete);
+        this.router.get('/:id', contratistasController.getOne);
+        this.router.get('/', contratistasController.search);
     }
 }
 
