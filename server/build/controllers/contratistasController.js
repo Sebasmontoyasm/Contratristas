@@ -18,26 +18,41 @@ class ContratistasController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const contratistas = yield database_1.default.query('SELECT * FROM contratista');
-            res.json('contratista');
+            res.json(contratistas);
         });
     }
     search(req, res) {
         res.json({ text: 'Listing contratistas' });
     }
     getOne(req, res) {
-        res.json({ text: 'This is de Contratistas.' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const contratista = yield database_1.default.query('SELECT * FROM contratista WHERE cedula = ?', [id]);
+            if (contratista.length > 0) {
+                return res.json(contratista[0]);
+            }
+            res.status(400).json({ text: "Contratista no encontrado" });
+        });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO GAMES SET ?', [req.body]);
+            yield database_1.default.query('INSERT INTO CONTRATISTA SET ?', [req.body]);
             res.json({ text: 'creating a contratista' });
         });
     }
     delete(req, res) {
-        res.json({ text: 'deleting a contratista' + +req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM CONTRATISTA WHERE cedula = ?', [id]);
+            res.json({ message: 'El contratista fue eliminado exitosamente' });
+        });
     }
     update(req, res) {
-        res.json({ text: 'updating a contratista' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE CONTRATISTA set ? WHERE cedula = ?', [req.body, id]);
+            res.json({ message: 'El contratista fue eliminado exitosamente' });
+        });
     }
 }
 exports.contratistasController = new ContratistasController();
